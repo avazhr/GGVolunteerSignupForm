@@ -16,7 +16,7 @@
     <hr>
 
     <section style="padding: 16px;">
-      <form action="action_page.php">
+      <form id="volunteer_form" method="post" action="volunteer.php">
       <!-- <form> -->
         <p>Please select one:</p>
 
@@ -74,7 +74,7 @@
             <input type="text" placeholder="Enter email" name="email" id="email" required>
         
             <label for="psw"><b>Street</b></label>
-            <input type="text" placeholder="Enter Street" name="psw" id="psw" required>
+            <input type="text" placeholder="Enter Street" name="stAddress" id="stAddress" required>
 
             <div class="big-row"> 
 
@@ -85,7 +85,7 @@
 
               <span role="presentation" class="row-element-three">      
                 <label for="state"><b>State</b></label>
-                <input type="text" placeholder="Enter State" name="city" id="city" required>
+                <input type="text" placeholder="Enter State" name="state" id="state" required>
               </span>		
                     
               <span role="presentation" class="row-element-three">
@@ -188,7 +188,7 @@
         
             <p>Please sign the following <a href="agreement.pdf">AGREEMENT, RELEASE AND WAIVER OF LIABILITY </a>.</p>
 
-            <form action="/action_page.php">
+            <form action="/volunteer.php">
             <!-- <form> -->
               <label for="pdf">Upload the signed AGREEMENT, RELEASE AND WAIVER OF LIABILITY here:</label>
               <input type="file" id="pdf" name="pdf" accept="pdf/*" >
