@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Volunteer Sign up Form">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stylesheet.css" />
+    </head>
+
+    <body>
+
+        <header style ="text-align:center;background-color: rgb(38, 77, 0); padding: 30px">
+          <h1 style="color:white;">GG20 VOLUNTEER FORM AVAILIBILITY UPDATE SHEET</h1>
+          <p style="color:white;" >Staff use only</p>
+        </header>
+
+        <form action="action_page.php" style="padding: 16px;">
+
+            <label for="psw-repeat" ><b>Sport:</b></label>
+            <select name = "dropdown" class="dropbtn">
+              <option value = "blank" selected></option>
+              <option value = "Wrestling">Wrestling</option>
+              <option value = "BB Gun/Ninja/Soccer">BB Gun/Ninja/Soccer</option>
+              <option value = "Pickleball/Fencing">Pickleball/Fencing</option>
+              <option value = "Swim/Tennis">Swim/Tennis</option>
+              <option value = "Swim-Adult">Swim-Adult</option>
+              <option value = "Footgolf/Disc Golf">Footgolf/Disc Golf</option>
+              <option value = "Various">Various</option>
+              <option value = "Track">Track</option>
+              <option value = "Swim-Lake/Racquet">Swim-Lake/Racquet</option>
+              <option value = "Soccer">Soccer</option>
+              <option value = "Baton">Baton</option>
+             
+           </select>
+           <br>
+            <label for="time" style="float:clear"><b>Time:</b></label>
+            <input type="text" placeholder="Enter time 1" name="time1" id="time1" required>
+            <input type="text" placeholder="Enter time 2" name="time2" id="time2" required>
+            <input type="text" placeholder="Enter time 3" name="time3" id="time3" required>
+            <input type="text" placeholder="Enter time 4" name="time4" id="time4" required>
+
+            <button type="submit" class="registerbtn" onclick="printScreen()">Submit</button>
+        
+        </form>
+
+
+        <script>
+             function printScreen(){
+    
+                window.location.href="thankYouPage.html";
+
+            } 
+        </script>
+    </body>
+</html>
