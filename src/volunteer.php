@@ -5,13 +5,15 @@
     
     session_start();
 
+    $volunteerid = uniqid('volunteer');
     $generalSports = filter_input(INPUT_POST, 'medical-uncheckbox');
     $medical = filter_input(INPUT_POST, 'medical-uncheckbox');
     $licenseLevel = filter_input(INPUT_POST, 'medical-licenseLv');
     $firstName = filter_input(INPUT_POST, 'firstName');
     $lastName = filter_input(INPUT_POST, 'lastName');
     $email = filter_input(INPUT_POST, 'email');
-    $stAddress = filter_input(INPUT_POST, 'stAddress');
+    $address1 = filter_input(INPUT_POST, 'address1');
+    $address2 = filter_input(INPUT_POST, 'address2');
     $city = filter_input(INPUT_POST, 'city');
     $state = filter_input(INPUT_POST, 'state_name');
     $zip = filter_input(INPUT_POST, 'zip');
@@ -21,37 +23,37 @@
     $tshirtSize = filter_input(INPUT_POST, 'tshirtSize');
     $preferredSports = filter_input(INPUT_POST, 'preferred-sports');
     $prevExperience = filter_input(INPUT_POST, 'prev-experience');
+    $sport =filter_input(INPUT_POST, 'sports');
     $waiver = filter_input(INPUT_POST, 'waiver');
-
-    console.log("FUCKKKKKKKKKK1");
-
     
     $host = "127.0.0.1";
     $port = 3306;
     $socket = "";
-    $dbusername = "georgid6_user1";
-    $dbpassword = "gg2020GG";
+//    $dbusername = "georgid6_volunteer";
+//    $dbpassword = "DXD_((Eq5gZq";
+    $dbusername = "root";
+    $dbpassword = "password";
     $dbname = "georgid6_wo3496";
 
     $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname, $port);
-    console.log("FUCKKKKKKKKKK2");
 
     if (mysqli_connect_error()) {
-        console.log("FUCKKKKKKKKKK3");
         die('Connect Error (' . mysqli_connect_errno() . ') '
             . mysqli_connect_error());
     } else {
         // Attempt insert query execution
-
-        console.log("FUCKKKKKKKKKK4");
-        $sql = "INSERT INTO wp_wjwg_volunteer_sign_up (general_sports, medical, license_level, first_name, last_name, email, str_address, str_address_2, city, state_name, zip, cellphone, dayphone, employer_name, t_shirt_size, preferred_sports, prev_experience, waiver) VALUES ('$generalSports', '$medical', '$licenseLevel', '$firstName', '$lastName','$email','$stAddress','$city','$state','$zip','$cellphone','$dayphone','$employer','$tshirtSize','$preferredSports','$prevExperience','$waiver')";
+        $sql = "INSERT INTO wp_wjwg_volunteer_sign_up (volunteer_id, general_sports, medical, license_level, first_name, last_name, 
+email, str_address, str_address_2, city, state_name, zip, cellphone, dayphone, employer_name, t_shirt_size, preferred_sports, 
+prev_experience, sport, waiver) VALUES ('$volunteerid', '$generalSports', '$medical', '$licenseLevel', '$firstName', '$lastName','$email','$address1',
+'$address2','$city','$state','$zip','$cellphone','$dayphone','$employer','$tshirtSize','$preferredSports','$prevExperience','$sport','$waiver')";
         
         if($conn->query($sql)) {
             echo "<script>alert('Records added successfully.')</script>";
+            header("Location:thankYouPage.html");
         } else {
             echo "<script>alert('Update Failed!')</script>";
             echo "Error: " . $sql . "" . $conn->error;
-            // header("Location:index2.0.html");
+            // header("Location:index2.0.php");
         }
         
         // Close connection
