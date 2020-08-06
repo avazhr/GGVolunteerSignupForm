@@ -5,7 +5,7 @@
       <paths name="volunteerform">
         <serverdata>
           <mappings>
-            <mapping deploy="GGVolunteerSignupForm/src" local="$PROJECT_DIR$/src" web="GGVolunteerSignupForm/src" />
+            <mapping local="$PROJECT_DIR$" web="/GGVolunteerSignupForm" />
           </mappings>
         </serverdata>
       </paths>

@@ -35,7 +35,7 @@ if (mysqli_connect_error()) {
     } else {
         echo "<script>alert('Update Failed!')</script>";
         echo "Error: " . $sql . "" . $conn->error;
-        // header("Location:index2.0.php");
+        // header("Location:index.php");
     }
 
     // Close connection

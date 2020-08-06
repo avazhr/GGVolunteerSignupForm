@@ -9,7 +9,7 @@
     <title>GG Volunteer Sign Up Form</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="index.js" ></script>
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -27,33 +27,35 @@
 
         <!-- Type of volunteer -->
         <label class="checkbox-container">General Sports Volunteer
-            <input type="radio" name="radio" id="medical-uncheckbox" onclick="medicalUncheck()">
+            <input type="radio" name="volunteer-type" id="medical-uncheckbox" onclick="medicalUncheck()"
+                   value="General Sports">
             <span class="checkmark"></span>
         </label>
         <label class="checkbox-container">Medical Volunteer
-            <input type="radio" name="radio" id="medical-checkbox" onclick="medicalCheck()">
+            <input type="radio" name="volunteer-type" id="medical-checkbox" onclick="medicalCheck()" value="Medical">
             <span class="checkmark"></span>
         </label>
 
         <div id="medical-licenseLv" style="display:none">
             <label><b>License Level:</b></label>
-            <select name="dropdown" class="dropbtn" id="lv" onchange="otherMedicalLv()">
+            <select name="lv" class="dropbtn" id="lv" onchange="otherMedicalLv()">
                 <!-- id="medical-licenseLv" -->
-                <option value="blank" selected></option>
-                <option value="md">MD</option>
-                <option value="pa">PA</option>
-                <option value="atc">ATC</option>
-                <option value="paramedic">Paramedic</option>
-                <option value="emt">EMT</option>
-                <option value="rn">RN</option>
-                <option value="dc">DC</option>
-                <option value="do">DO</option>
-                <option value="1st aid">1st Aid/CPR only</option>
-                <option value="other">Other:</option> <!--onclick, show blank to fill--->
+                <option value="" selected></option>
+                <option value="MD">MD</option>
+                <option value="PA">PA</option>
+                <option value="ATC">ATC</option>
+                <option value="Paramedic">Paramedic</option>
+                <option value="EMT">EMT</option>
+                <option value="RN">RN</option>
+                <option value="DC">DC</option>
+                <option value="DO">DO</option>
+                <option value="1st Aid/CPR only">1st Aid/CPR only</option>
+                <option value="Other">Other:</option> <!--onclick, show blank to fill--->
             </select>
         </div>
 
-        <input id="medicalLicenseLvAns" style="display:none" type="text" placeholder="Enter your medical license level"
+        <input id="medicalLicenseLvAns" name="lv-other" style="display:none" type="text"
+               placeholder="Enter your medical license level"
                name="otherLicenseLv">
 
         <div style="margin-top: 22px" class="container">
@@ -79,7 +81,8 @@
                    required>
 
             <label for="address2"><b>Address line 2</b></label>
-            <input type="text" placeholder="Apartment, suite, unit, building, floor, etc." name="address2" id="address2">
+            <input type="text" placeholder="Apartment, suite, unit, building, floor, etc." name="address2"
+                   id="address2">
 
             <div class="big-row"> 
               <span role="presentation" class="row-element-three">
@@ -88,8 +91,8 @@
               </span>
 
                 <span role="presentation" class="row-element-three">
-                <label for="state"><b>State</b></label>
-                <input type="text" placeholder="Enter State" name="state" id="state" required>
+                <label for="state-name"><b>State</b></label>
+                <input type="text" placeholder="Enter State" name="state-name" id="state-name" required>
               </span>
 
                 <span role="presentation" class="row-element-three">
@@ -114,89 +117,59 @@
             <input type="text" placeholder="Enter Name of Employer" name="employer" id="employer" required>
 
             <label for="tshirtSize" style="padding-right: 5px"><b>T-Shirt Size (Adult):</b></label>
-            <select name="dropdown" class="dropbtn" id="tshirtSize">
+            <select name="tshirtSize" class="dropbtn" id="tshirtSize">
                 <option value="blank" selected></option>
-                <option value="s">S</option>
-                <option value="m">M</option>
-                <option value="l">L</option>
-                <option value="xl">XL</option>
-                <option value="2xl">2XL</option>
-                <option value="3xl">3XL</option>
-                <option value="4xl">4XL</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="2XL">2XL</option>
+                <option value="3XL">3XL</option>
+                <option value="4XL">4XL</option>
             </select>
             <br>
             <br>
 
-            <label><b>Availability: Please specify availability </b></label>
+            <label><b>Availability</b></label>
+            <hr>
 
-                    <?php
-                    $host = "127.0.0.1";
-                    $port = 3306;
-                    $socket = "";
-                    //    $dbusername = "georgid6_volunteer";
-                    //    $dbpassword = "DXD_((Eq5gZq";
-                    $dbusername = "root";
-                    $dbpassword = "password";
-                    $dbname = "georgid6_wo3496";
+            <?php
+            $host = "127.0.0.1";
+            $port = 3306;
+            $socket = "";
+            //    $dbusername = "georgid6_volunteer";
+            //    $dbpassword = "DXD_((Eq5gZq";
+            $dbusername = "root";
+            $dbpassword = "password";
+            $dbname = "georgid6_wo3496";
 
-                    $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname, $port);
+            $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname, $port);
 
-                    if (mysqli_connect_error()) {
-                        die('Connect Error (' . mysqli_connect_errno() . ') '
-                            . mysqli_connect_error());
-                    } else {
-                        // Attempt insert query execution
-                        $query = "SELECT * FROM wp_wjwg_volunteer_admin";
-                        if ( $result = $conn->query($query)) {
-                            while ($row = $result->fetch_array())  {
-                                $sportName = $row['sport'];
-                                $sportId = $row['sports_id'];
-                                $startDate = $row['start_date'];
-                                $endDate = $row['end_date'];
-                            }
-                        } else {
-                            echo "<script>alert('Query Failed!')</script>";
-                            echo "Error: " . $query . "" . $conn->error;
-                            // header("Location:index2.0.php");
+            if (mysqli_connect_error()) {
+                die('Connect Error (' . mysqli_connect_errno() . ') '
+                    . mysqli_connect_error());
+            } else {
+                // Drop down for sports
+                $sqli = "SELECT * FROM wp_wjwg_volunteer_admin;";
+                if ($result = mysqli_query($conn, $sqli)) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        echo '<label><b>'.$row['sport'].'</b></label><br><br>';
+                        for ($i=strtotime($row['start_date']); $i<=strtotime($row['end_date']); $i+=86400) {
+                            echo '<input type="hidden" name="checkedSport" value="'.$row['sport'].'"></input>';
+                            echo '<input type="checkbox" name="date[]" value="'.date("Y-m-d", $i).'">'.date("Y-m-d", $i).'</input>';
                         }
+                        echo '<br><br>';
                     }
-                    // Close connection
-                    $conn->close();
-                    ?>
-            <br>
+                } else {
+                    echo "<script>alert('Query Failed!')</script>";
+                    echo "Error: " . $sqli . "" . $conn->error;
+                    // header("Location:index2.0.php");
+                }
+                // Close connection
+                $conn->close();
+            }
+            ?>
 
-            <select name="dropdown" class="dropbtn" id="sports">
-                <option value="Blank"></option>
-                <option value="<?php echo $sportName;?>"><?php echo $sportName;?></option>
-<!--                <option value="BB Gun/Ninja/Soccer">BB Gun/Ninja/Soccer</option>-->
-<!--                <option value="Pickleball/Fencing">Pickleball/Fencing</option>-->
-<!--                <option value="Swim/Tennis">Swim/Tennis</option>-->
-<!--                <option value="Swim-Adult">Swim-Adult</option>-->
-<!--                <option value="Footgolf/Disc Golf">Footgolf/Disc Golf</option>-->
-            </select>
-
-            <label for="date1"><b style="padding-left:20px; padding-right: 5px;"><?php echo $startDate;?></b></label>
-            <!--change to changable text-->
-            <select name="dropdown" class="dropbtn" id="date1">
-                <option value="s"></option>
-                <option value="s">All day</option>
-                <option value="m">Morning</option>
-                <option value="l">Afternoon</option>
-                <option value="xl">Evening</option>
-                <option value="2xl">Not available</option>
-            </select>
-
-            <label for="date2"><b style="padding-left:50px; padding-right: 5px;"><?php echo $endDate;?></b></label>
-            <select name="dropdown" class="dropbtn" id="date2">
-                <option value="s"></option>
-                <option value="s">All day</option>
-                <option value="m">Morning</option>
-                <option value="l">Afternoon</option>
-                <option value="xl">Evening</option>
-                <option value="2xl">Not available</option>
-            </select>
-
-            <br>
             <br>
 
             <label for="preferred-sports" style="padding-right: 5px"><b> Preferred Sports ONLY to volunteer
@@ -215,7 +188,7 @@
             <br>
 
             <label for="prev-experience" style="padding-right: 5px"><b> Volunteered with the Georgia Games before? </b></label>
-            <select name="dropdown" class="dropbtn" id="prev-experience" style="margin-bottom: 16px">
+            <select name="prev-experience" class="dropbtn" id="prev-experience" style="margin-bottom: 16px">
                 <option value="Blank"></option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -233,10 +206,9 @@
 
             <button type="submit" class="registerbtn" onclick="">Submit</button>
         </div>
-
     </form>
 </section>
-
-
+<script>
+</script>
 </body>
 </html>
